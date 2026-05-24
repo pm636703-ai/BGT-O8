@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>BGT Learning</title>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2156099005182336');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2156099005182336&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    background:#0b0f19;
+    color:#ffffff;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    padding:25px 18px 40px;
+    position:relative;
+    overflow:hidden;
+    /* NEW COLOR SCHEME: Dark royal navy + vibrant cyan & gold accents */
+    background:
+        radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.08), transparent 50%),
+        radial-gradient(circle at 85% 70%, rgba(255, 193, 7, 0.06), transparent 55%),
+        linear-gradient(145deg, #0a0f1c 0%, #0e1428 100%);
+}
+
+/* Glowing orbs with refined colors (cyan + warm gold) */
+.container::before,
+.container::after{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:0.3;
+    animation:floatGlow 12s ease-in-out infinite alternate;
+}
+
+.container::before{
+    background:#00d4ff;
+    top:-60px;
+    right:-80px;
+}
+
+.container::after{
+    background:#ffb347;
+    bottom:-70px;
+    left:-70px;
+    animation-delay:3s;
+}
+
+@keyframes floatGlow{
+    0%{transform:translate(0,0) scale(1); opacity:0.2;}
+    100%{transform:translate(25px,-15px) scale(1.2); opacity:0.4;}
+}
+
+.content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+/* Profile Card - glassmorphism refined */
+.profile-card{
+    background:rgba(12, 18, 34, 0.65);
+    border:1px solid rgba(0, 212, 255, 0.25);
+    border-radius:32px;
+    padding:24px 20px;
+    backdrop-filter:blur(14px);
+    box-shadow:0 25px 45px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(0,212,255,0.1) inset;
+    margin-bottom:24px;
+    transition: transform 0.2s;
+}
+
+.avatar{
+    width:110px;
+    height:110px;
+    margin:0 auto 18px;
+    padding:3px;
+    border-radius:32px;
+    background:linear-gradient(135deg, #00d4ff, #ffb347, #f0a500);
+    box-shadow:0 8px 20px rgba(0,212,255,0.3);
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:29px;
+    background:#11161f;
+}
+
+h1{
+    font-size:32px;
+    font-weight:800;
+    letter-spacing:-0.3px;
+    background:linear-gradient(135deg, #FFFFFF, #b8e1fc);
+    background-clip:text;
+    -webkit-background-clip:text;
+    color:transparent;
+    margin-bottom:5px;
+}
+
+.tagline{
+    color:#ffcd7e;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    margin-bottom:10px;
+}
+
+.description{
+    font-size:13.5px;
+    color:#cdd9ff;
+    line-height:1.55;
+    font-weight:400;
+}
+
+/* 3 Glass stats cards */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:20px 0 18px;
+}
+
+.stat{
+    background:rgba(20, 28, 48, 0.7);
+    border-radius:24px;
+    padding:14px 6px;
+    border:1px solid rgba(0, 212, 255, 0.2);
+    backdrop-filter:blur(8px);
+    transition: all 0.2s ease;
+}
+
+.stat:hover{
+    border-color:#ffb347;
+    transform:translateY(-3px);
+}
+
+.stat h3{
+    font-size:20px;
+    color:#ffcd7e;
+    margin-bottom:4px;
+    font-weight:800;
+}
+
+.stat p{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    color:#a3b6e6;
+    font-weight:500;
+}
+
+/* Primary CTA Button - Premium style */
+.cta-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:18px 12px;
+    width:100%;
+    margin:18px auto 22px;
+    border-radius:60px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:800;
+    font-size:20px;
+    background:linear-gradient(105deg, #0f172f 0%, #00a6c4 40%, #ffbc5e 100%);
+    background-size:200% auto;
+    animation:gradientShift 6s ease infinite, subtlePulse 2s infinite;
+    box-shadow:0 12px 30px rgba(0,180,220,0.4);
+    border:none;
+    cursor:pointer;
+    transition: 0.2s;
+}
+
+.cta-btn img{
+    width:24px;
+    height:24px;
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+@keyframes gradientShift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+@keyframes subtlePulse{
+    0%{transform:scale(1); box-shadow:0 12px 30px rgba(0,180,220,0.4);}
+    100%{transform:scale(1.02); box-shadow:0 18px 35px rgba(255,180,70,0.5);}
+}
+
+/* 4 Benefit Cards - new vibrant look */
+.benefits{
+    display:grid;
+    gap:14px;
+    margin:10px 0 28px;
+}
+
+.benefit{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    background:rgba(12, 18, 32, 0.6);
+    border:1px solid rgba(0, 200, 255, 0.2);
+    border-radius:24px;
+    padding:14px 18px;
+    text-align:left;
+    transition:0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    backdrop-filter:blur(4px);
+}
+
+.benefit:hover{
+    transform:translateX(6px) translateY(-2px);
+    border-color:#ffbc5e;
+    background:rgba(26, 35, 60, 0.75);
+}
+
+.icon{
+    width:48px;
+    height:48px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    background:linear-gradient(145deg, #00c6e6, #ffae3c);
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+
+.benefit h4{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:4px;
+    color:#f0f3ff;
+}
+
+.benefit p{
+    font-size:12px;
+    color:#aab6e6;
+    line-height:1.35;
+}
+
+/* Footer section */
+.footer{
+    margin-top:12px;
+    font-size:13px;
+    color:#b9c4ed;
+    border-top:1px dashed rgba(0,212,255,0.2);
+    padding-top:18px;
+}
+
+.footer span{
+    color:#ffcd7e;
+    font-weight:700;
+    letter-spacing:0.3px;
+}
+
+.note{
+    margin-top:10px;
+    font-size:10px;
+    color:#7b8bc0;
+}
+
+/* Floating Telegram Button - fresh accent */
+.float-btn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:58px;
+    height:58px;
+    border-radius:30px;
+    background:linear-gradient(135deg, #1e96e6, #0d74b3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 25px rgba(0,170,255,0.5), 0 0 0 2px rgba(255,210,90,0.3);
+    animation:bounceFloat 2.2s infinite ease;
+    z-index:999;
+    text-decoration:none;
+    transition:0.2s;
+}
+
+.float-btn img{
+    width:28px;
+    height:28px;
+}
+
+.float-btn:hover{
+    transform:scale(1.07);
+    background:#2aa6f0;
+}
+
+@keyframes bounceFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-7px);}
+}
+
+/* responsive touches */
+@media (max-width: 420px){
+    .container{
+        padding:20px 16px 35px;
+    }
+    .cta-btn{
+        font-size:18px;
+        padding:15px 10px;
+    }
+    .icon{
+        width:42px;
+        height:42px;
+        font-size:22px;
+    }
+    .benefit h4{
+        font-size:14px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="content">
+
+        <!-- Profile Section: English description + new color harmony -->
+        <div class="profile-card">
+            <div class="avatar">
+                <img src="bgt.jpg" alt="BGT TRADING">
+            </div>
+
+            <h1>BGT TRADING</h1>
+            <div class="tagline">Elite Trading Community 🚀</div>
+            <div class="description">
+                Join a premium educational community focused on market analysis, hands-on learning, 
+                and disciplined trading development. We turn ambition into consistency.
+            </div>
+        </div>
+
+        <!-- 3 Glass Cards (Key metrics) -->
+        <div class="stats">
+            <div class="stat">
+                <h3>23K+</h3>
+                <p>Members</p>
+            </div>
+            <div class="stat">
+                <h3>24/7</h3>
+                <p>Expert Support</p>
+            </div>
+            <div class="stat">
+                <h3>100%</h3>
+                <p>Practical Edge</p>
+            </div>
+        </div>
+
+        <!-- Main Telegram CTA Button (ENGLISH) -->
+        <button class="cta-btn" id="telegramJoinBtn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+            Join Telegram Now
+        </button>
+
+        <!-- 4 Benefit Cards (English, updated descriptions with fresh style) -->
+        <div class="benefits">
+            <div class="benefit">
+                <div class="icon">📊</div>
+                <div>
+                    <h4>Live Market Analysis</h4>
+                    <p>Daily insights, trend breakdowns & real-time signals.</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div class="icon">🎓</div>
+                <div>
+                    <h4>Step-by-Step Training</h4>
+                    <p>From foundations to advanced pro techniques.</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div class="icon">💎</div>
+                <div>
+                    <h4>Premium Setups</h4>
+                    <p>High-probability trade opportunities & scanners.</p>
+                </div>
+            </div>
+
+            <div class="benefit">
+                <div class="icon">📈</div>
+                <div>
+                    <h4>Consistency Focus</h4>
+                    <p>Risk management, mindset & long-term growth.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer (English + disclaimer) -->
+        <div class="footer">
+            Powered by <span>ANNA Group</span>
+            <div class="note">
+                📌 Educational purposes only. Trading involves risks. Past performance does not guarantee future results.
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Floating Telegram Button -->
+<a href="#" id="floatTelegramBtn" class="float-btn">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+</a>
+
+<!-- SCRIPT: Facebook Pixel Lead Event + Redirection -->
+<script>
+// Unified function to track Lead event using Meta Pixel and redirect to Telegram channel
+function trackAndRedirect() {
+    // Facebook Pixel Lead tracking - critical for conversion
+    if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+            content_name: 'Telegram_Join_Button',
+            content_category: 'Community_Join_3point_traders',
+            currency: 'USD'
+        });
+        console.log('Facebook Lead event tracked');
+    } else {
+        console.warn('Facebook Pixel not loaded');
+    }
+    
+    // Short delay ensures tracking completes before redirect
+    setTimeout(function() {
+        window.open('https://t.me/+gIlfgRiQ67RmZmFl', '_blank');
+    }, 100);
+}
+
+// Main Telegram button event listener
+const mainBtn = document.getElementById('telegramJoinBtn');
+if (mainBtn) {
+    mainBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        trackAndRedirect();
+    });
+}
+
+// Floating Telegram button event listener
+const floatBtn = document.getElementById('floatTelegramBtn');
+if (floatBtn) {
+    floatBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        trackAndRedirect();
+    });
+}
+</script>
+</body>
+</html>
